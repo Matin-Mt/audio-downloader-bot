@@ -12,11 +12,7 @@ class Settings:
     TOKEN: Final = os.getenv('TOKEN')
     BOT_USERNAME: Final = os.getenv('BOT_USERNAME')
     CHANNEL_USERNAME: Final = os.getenv('CHANNEL_USERNAME')
-    MONGO_HOST = os.getenv("MONGO_HOST")
-    MONGO_PORT = int(os.getenv("MONGO_PORT"))
-    MONGO_DB = os.getenv("MONGO_DB")
-    MONGO_USER = os.getenv("MONGO_USER")
-    MONGO_PASSWORD = os.getenv("MONGO_PASSWORD")
+    MONGO_ATLAS_URI: Final = os.getenv('MONGO_ATLAS_URI')
 
 
 @lru_cache()

@@ -1,18 +1,18 @@
-from pymongo import MongoClient
+from pymongo.mongo_client import MongoClient
 import gridfs
 
-from core.config import get_settings
+from src.core.config import get_settings
 
 settings = get_settings()
+uri = settings.MONGO_ATLAS_URI
 
-mongo_uri = f"mongodb://{settings.MONGO_USER}" \
-            f":{settings.MONGO_PASSWORD}@" \
-            f"{settings.MONGO_HOST}:" \
-            f"{settings.MONGO_PORT}/" \
-            f"{settings.MONGO_DB}" \
-            f"?authSource=admin"
+client = MongoClient(uri)
 
-client = MongoClient(mongo_uri)
-
-db = client[settings.MONGO_DB]
+db = client["TelegramBotDB"]
 fs = gridfs.GridFS(db)
+
+try:
+    client.admin.command('ping')
+    print("Pinged your deployment. You successfully connected to MongoDB!")
+except Exception as e:
+    print(e)
